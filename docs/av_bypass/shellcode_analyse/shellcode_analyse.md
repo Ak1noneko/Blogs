@@ -1,5 +1,5 @@
-##### 翻译自 [这里](https://idafchev.github.io/exploit/2017/09/26/writing_windows_shellcode.html)，转发请标注原作者和译者，违者不究，但我会背地里骂你。
-#### 2022-5-29
+##### 翻译自 [这里](https://idafchev.github.io/exploit/2017/09/26/writing_windows_shellcode.html)，转发请标注原作者和译者
+
 ### 介绍
 
 本教程适用于 x86 32 位 shellcode。 Windows shellcode 比 Linux 的 shellcode 更难编写，你马上就会知道为什么。首先，我们需要对 Windows 架构有一个基本的了解，如下图所示，请好好了解。分割线上方的所有内容都处于用户模式，下方的所有内容都处于内核模式。
