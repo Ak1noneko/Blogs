@@ -1,5 +1,7 @@
 <!-- _navbar.md -->
-* 日寄
+* [首页](README.md)
+  
+* [日寄](ggnote/README.md)
 
 * WEB渗透
 
@@ -10,4 +12,4 @@
 * 红队
 
 * [逆向工程](reverse_engine/README.md)
-  * [windows漏洞开发](/reverse_engine/windows_exploit/README.md)
+  * [windows漏洞攻击开发](/reverse_engine/windows_exploit/README.md)
