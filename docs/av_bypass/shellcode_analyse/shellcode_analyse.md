@@ -104,9 +104,8 @@ mov ebx, [ebx + 0x10] ; 获取 kernel32.dll 基地址
 15. 查找函数地址（基地址+函数RVA）
     
 ![9](shellcode_analyse/9.gif)
+
 ### 调用函数
-### 写shellcode
-### 测试shellcode
 
 使用PEview看的更直接
 
