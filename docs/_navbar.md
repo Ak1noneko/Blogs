@@ -1,7 +1,7 @@
 <!-- _navbar.md -->
 * [首页](README.md)
   
-* [日寄](ggnote/README.md)
+* [日寄](ggnote/README.m)
 
 * WEB渗透
 
