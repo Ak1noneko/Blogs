@@ -76,7 +76,7 @@ mov ebx, [ebx + 0x10] ; 获取 kernel32.dll 基地址
 
 ### 发现函数地址
 
-现在我们有了 kernel32.dll 的基地址，是时候找到 WinExec 函数的地址了。为此，我们需要遍历 DLL 的多个标头。您应该熟悉 PE 可执行文件的格式。熟悉 [PEView] (http://wjradburn.com/software/)并查看一些很棒的文件格式插图。
+现在我们有了 kernel32.dll 的基地址，是时候找到 WinExec 函数的地址了。为此，我们需要遍历 DLL 的多个标头。您应该熟悉 PE 可执行文件的格式。熟悉 [PEView](http://wjradburn.com/software/)并查看一些很棒的文件格式插图。
 
 相对虚拟地址 (RVA) 是相对于 PE 可执行文件在内存中加载时的基地址的地址（当可执行文件在磁盘上时，RVA 不等于文件偏移量！）。
 
