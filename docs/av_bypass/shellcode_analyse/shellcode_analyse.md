@@ -540,5 +540,4 @@ mov [ebp-4], esp	; var4 = "WinExec\x00"
 
 通过修复，堆栈对齐到 4 个字节：
 
-![17](shellcode_analyse/16.png)
-
+![17](shellcode_analyse/17.png)
