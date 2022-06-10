@@ -1,6 +1,6 @@
 # 摆烂日寄
 
-## 日常学习分享，只讨论原理问题
+## 只是外网的搬运工，请尽量看原文。
 
 #### 最近更新
 ##### 2022-5-30
@@ -9,3 +9,9 @@
 [shellcode基本原理分析](av_bypass/shellcode_analyse/shellcode_analyse.md)
 ##### 2022-5-31
 [windows漏洞攻击开发part3](reverse_engine/windows_exploit/part3.md)
+##### 2022-6-10
+[windows漏洞攻击开发part4](reverse_engine/windows_exploit/part4.md)
+##### 2022-6-10
+[windows漏洞攻击开发part5](reverse_engine/windows_exploit/part5.md)
+##### 2022-6-10
+[windows漏洞攻击开发part6](reverse_engine/windows_exploit/part6.md)
