@@ -1,5 +1,5 @@
 <!-- _navbar.md -->
-* [首页](README.md)
+* [首页](README.md "Ak1noneko的小屋")
   
 * [日寄](ggnote/README.md "Ak1noneko的小屋")
 
