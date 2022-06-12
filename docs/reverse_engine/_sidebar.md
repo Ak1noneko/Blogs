@@ -5,6 +5,6 @@
   * [part4 使用jump定位shellcode](reverse_engine/windows_exploit/part4)
   * [part5 egghunting](reverse_engine/windows_exploit/part5)
   * [part6 SEH 攻击](reverse_engine/windows_exploit/part6)
-* [linux漏洞攻击开发]
+* [linux漏洞攻击开发](reverse_engine/linux_exploit/)
   * [整型溢出](reverse_engine/linux_exploit/integer_overflow.md)
   
