@@ -7,4 +7,4 @@
   * [part6 SEH 攻击](reverse_engine/windows_exploit/part6)
 * [linux漏洞攻击开发](reverse_engine/linux_exploit/)
   * [整型溢出](reverse_engine/linux_exploit/integer_overflow.md)
-  * [Off-By-One](reverse_engine/linux_exploit/Off-By-One%20漏洞(栈基础)/1.png)
+  * [Off-By-One](reverse_engine/linux_exploit/Off-By-One%20漏洞(栈基础))
