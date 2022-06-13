@@ -8,3 +8,4 @@
 * [linux漏洞攻击开发](reverse_engine/linux_exploit/)
   * [整型溢出](reverse_engine/linux_exploit/integer_overflow.md)
   * [Off-By-One](reverse_engine/linux_exploit/Off-By-One%20漏洞(栈基础))
+  * [理解 glibc malloc](reverse_engine/linux_exploit/了解%20glic%20malloc.md)
