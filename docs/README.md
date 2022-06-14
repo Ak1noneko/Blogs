@@ -1,6 +1,6 @@
-# 摆烂日寄
+## 摆烂日寄
 
-## 只是外网的搬运工，请尽量看原文。
+### 只是外网的搬运工，请尽量看原文。
 
 #### 最近更新
 ##### 2022-5-30
@@ -15,9 +15,5 @@
 [windows漏洞攻击开发part5](reverse_engine/windows_exploit/part5.md)
 ##### 2022-6-10
 [windows漏洞攻击开发part6](reverse_engine/windows_exploit/part6.md)
-##### 2022-6-12
-[整型溢出](reverse_engine/linux_exploit/integer_overflow.md)
-##### 2022-6-12
-[Off-By-One](reverse_engine/linux_exploit/Off-By-One%20漏洞(栈基础))
-##### 2022-6-13
-(转)[理解 glibc malloc](reverse_engine/linux_exploit/了解%20glic%20malloc.md)
+##### 2022-6-14
+[初识 ROP](reverse_engine/windows_bypass/ROP_bypass_DEP.md)

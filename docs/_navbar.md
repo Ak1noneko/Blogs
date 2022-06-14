@@ -13,4 +13,3 @@
 
 * [逆向工程](reverse_engine/README.md)
   * [windows漏洞攻击开发](/reverse_engine/windows_exploit/README.md)
-  * [linux漏洞攻击开发](/reverse_engine/linux_exploit/README.md)

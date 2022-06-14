@@ -5,7 +5,5 @@
   * [part4 使用jump定位shellcode](reverse_engine/windows_exploit/part4)
   * [part5 egghunting](reverse_engine/windows_exploit/part5)
   * [part6 SEH 攻击](reverse_engine/windows_exploit/part6)
-* [linux漏洞攻击开发](reverse_engine/linux_exploit/)
-  * [整型溢出](reverse_engine/linux_exploit/integer_overflow.md)
-  * [Off-By-One](reverse_engine/linux_exploit/Off-By-One%20漏洞(栈基础))
-  * [理解 glibc malloc](reverse_engine/linux_exploit/了解%20glic%20malloc.md)
+* [windows防御机制绕过]
+  * [初识 ROP](reverse_engine/windows_bypass/ROP_bypass_DEP.md)
