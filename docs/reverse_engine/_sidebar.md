@@ -7,3 +7,4 @@
   * [part6 SEH 攻击](reverse_engine/windows_exploit/part6)
 * [windows防御机制绕过](reverse_engine/windows_bypass/)
   * [初识 ROP](reverse_engine/windows_bypass/ROP_bypass_DEP.md)
+  * [初识 ROP 2](reverse_engine/windows_bypass/ROP_bypass_DEP_2.md)
