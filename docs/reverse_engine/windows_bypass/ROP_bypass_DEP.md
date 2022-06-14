@@ -28,7 +28,7 @@ ROP 背后的主要思想是控制堆栈，以进一步将来自内存中子程�
 
 下表列出了可用于实现此目的的 API 及其功能
 
-![1](ROP_bypass_DEP/1.png))
+![1](ROP_bypass_DEP/1.png)
 
 可以开发 ROP 链来使用上述任何功能，前提是它可用于受害机器的 Windows 版本。
 
@@ -81,11 +81,11 @@ expl.close()
 
 正如预期的那样，应用程序崩溃了
 
-![3](ROP_bypass_DEP/3.png))
+![3](ROP_bypass_DEP/3.png)
 
 在将程序附加到 Immunity Debugger 并运行相同的脚本时，我们可以看到 EIP 被四个（指令长度）41 覆盖，这是 A 的十六进制。
 
-![4](ROP_bypass_DEP/4.png))
+![4](ROP_bypass_DEP/4.png)
 
 我们的目标是控制 EIP 并将其指向我们的 shellcode 所在的位置。
 
@@ -105,7 +105,7 @@ expl.close()
 
 在我们的例子中是 396F4338
 
-![5](ROP_bypass_DEP/5.png))
+![5](ROP_bypass_DEP/5.png)
 
 我们将再次使用 metasploit 来计算确切的偏移量。
 
@@ -119,7 +119,7 @@ expl.close()
 
 对于 vulnserver，它是 2006。这意味着在 2006 个字符之后，接下来的四个字符会覆盖 EIP。
 
-![6](ROP_bypass_DEP/6.png))
+![6](ROP_bypass_DEP/6.png)
 
 现在我们将发送给受害者的有效负载将类似于缓冲区溢出的有效负载。
 
@@ -131,7 +131,7 @@ attack = prefix + ‘\x42\x42\x42\x42’+padding
 
 例如，在发送上述有效负载时，EIP 将被四个 B(\x42) 覆盖，如下所示。padding 将确保有效负载长度为 3000。
 
-![7](ROP_bypass_DEP/7.png))
+![7](ROP_bypass_DEP/7.png)
 
 ##### 开发 ROP chain
 
@@ -149,7 +149,7 @@ attack = prefix + ‘\x42\x42\x42\x42’+padding
 !mona rop -m *.dll -cp nonul
 ```
 
-![8](ROP_bypass_DEP/8.png))
+![8](ROP_bypass_DEP/8.png)
 
 然后等待该过程结束，大约需要 3 分钟。与此同时，Mona 将检查所有 dll (*.dll) 并构建一系列可用的 gadgets。
 
@@ -170,7 +170,7 @@ VirtualProtect() 需要五个参数
 
 让我们看一下 mona 生成的 ROP 函数，并尝试了解它是如何工作的。
 
-![9](ROP_bypass_DEP/9.png))
+![9](ROP_bypass_DEP/9.png)
 
 第 11、12、13、14 行 — 0X201 的 dwSize 被放入 EAX，然后转移到 EBX。
 
@@ -203,9 +203,9 @@ attack = prefix + rop_chain +nops + calc + padding
 
 我们将恶意代码附加到 nops 并在末尾添加填充以确保有效负载长度为 3000。
 
-![10](ROP_bypass_DEP/10.png))
+![10](ROP_bypass_DEP/10.png)
 
-![11](ROP_bypass_DEP/11.png))
+![11](ROP_bypass_DEP/11.png)
 
 然后我们发送漏洞利用，计算器将在受害者 Windows 机器中打开。
 
