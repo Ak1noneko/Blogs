@@ -3,6 +3,8 @@
 ### 只是外网的搬运工，请尽量看原文。
 
 #### 最近更新
+##### 2022-11-28
+[java反序列化之 cc1](java/cc1/cc1.md)
 ##### 2022-5-30
 [windows漏洞攻击开发part2](reverse_engine/windows_exploit/part2.md)
 ##### 2022-5-30
