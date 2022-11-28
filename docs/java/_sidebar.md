@@ -1,2 +1,2 @@
 <!-- docs/_sidebar.md -->
-* [反序列化之cc1](README.md "Ak1noneko的小屋")
+* [反序列化之 cc1](java/cc1/cc1.md)
