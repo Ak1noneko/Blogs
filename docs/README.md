@@ -4,6 +4,8 @@
 https://ak1noneko.github.io/Blogs/#/
 
 #### 最近更新
+##### 2022-11-29
+[java反序列化之 cc6](java/cc6/cc6.md)
 ##### 2022-11-28
 [java反序列化之 cc1](java/cc1/cc1.md)
 ##### 2022-5-30
