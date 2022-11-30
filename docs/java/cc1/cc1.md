@@ -1,4 +1,4 @@
-### CommonsCollections cc1
+### CommonsCollections CC1
 
 #### 前置知识
 
@@ -84,7 +84,7 @@ pom.xml，这里我们选择的是 3.2.1 版本的 Commons Collections。
 
 接下来我们需要写出 payload ，顺便解决其中几个关键问题。
 
-#### payload 编写
+#### 几个问题
 
 我们需要解决第一个问题，那就是 Runtime 这个类它是不可以序列化的，他没有继承 Serizlizable 接口。
 
@@ -176,6 +176,8 @@ public @interface Target {
 ```
 所以我们将 map.put("key", "value"); 改成 map.put("value", "value")
 
+最后，我们需要使用 ConstantTransformer 包裹一个 Runtime.class ，这个方法会原样返回参数，构成完整的 ChainedTransformer 数组。
+
 完整代码
 
 ```java
@@ -260,6 +262,7 @@ public class CC1Test {
 ![enset](img_cc1/Annotation_readobject_enset.png)
 
 可以看到，同样在这个方法中，有一个 membervalues.entrySet() 的调用，那么他就会调用 invoke 方法。所以我们只需要使用动态代理包裹一下 annotationInvocation 即可。
+
 
 最终代码
 

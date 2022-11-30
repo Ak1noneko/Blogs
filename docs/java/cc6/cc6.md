@@ -1,4 +1,4 @@
-### CommonsCollections cc6
+### CommonsCollections CC6
 
 CC1 链在 java 8u71 之后对 CC1 链中的 membervalue 的获取方法进行了修改，同时删掉了 checkvalue 方法，导致 CC1 链不可以使用了，所以 CC1 链同时受到 jdk 版本和外部库的约束，有没有一个链子是不受 jdk 版本的约束呢，那就是 CC6 。
 
@@ -40,7 +40,7 @@ CC6 的链子
 
 可以看到我们序列化的时候 TiedMapEntry 把我们给他的 key 放进去了，导致反序列化的时候，map.containsKey 为 true， 不能正确运行到 .tranform 方法，解决方法也很简单，put之后，我们手动给他删了就行。
 
-完整代码
+#### 完整代码
 
 ```java
 package org.example;
