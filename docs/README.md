@@ -3,6 +3,9 @@
 https://ak1noneko.github.io/Blogs/#/
 
 #### 最近更新
+##### 2022-12-1
+[java反序列化之 shiro 550 ](java/shiro550/shiro550.md)
+##### shiro 550 反序列化漏洞
 ##### 2022-11-29
 [java反序列化之 CC6](java/cc6/cc6.md)
 ##### 2022-11-28
