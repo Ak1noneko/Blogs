@@ -66,19 +66,27 @@ git checkout shiro-root-1.2.4
 
 ![pom_tree](img_shiro550/pom_tree.png)
 
-但是它是一个 test 包，也就是说如果你在真实环境下是打不到的，真正能打的是 shiro 自带的CB 包。
+但是它是一个 test 包，也就是说如果你在真实环境下是打不到的，这里我就不讨论了，就直接看下真实环境能打的 CB 链。shiro 自带了一个有完整反序列化利用的库，形成无依赖利用链。
 
+![CB](img_shiro550/CB.png)
 
+这个是个 javaBean 的增强库。
 
+![beantest.png](img_shiro550/beantest.png)
 
+它的主要功能是给了我们另一种调用对象属性的方法。以前我们需要调用  get 方法获得对象属性。我们跟进一下。
 
+![](img_shiro550/getsimplebean.png)
 
+最终我们来到了这里，因为我传的是一个普通的 beam 对象，我们跟进下 getSimpleProperty 方法。
 
+![](img_shiro550/invoke.png)
 
+这里我们能看到一个 invokemethod 方法，跟进就能看到。
 
+![](img_shiro550/invke_end.png)
 
-
-
+一个标准的反射调用。
 
 
 
